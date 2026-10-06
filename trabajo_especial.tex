@@ -1,0 +1,354 @@
+% ============================================================
+% Trabajo Especial de Licenciatura en Ciencias de la Computación
+% FAMAF - Universidad Nacional de Córdoba
+% ============================================================
+
+\documentclass[12pt,a4paper]{report}
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
+
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{TeX Gyre Termes}}
+
+\usepackage[
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3cm,
+    right=2.5cm
+]{geometry}
+
+\usepackage{setspace}
+\setstretch{1.0}
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[
+    hidelinks,
+    bookmarks
+]{hyperref}
+
+\usepackage[
+    capitalise,
+    nameinlink
+]{cleveref}
+
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+    language=spanish,
+    autolang=hyphen
+]{biblatex}
+
+\addbibresource{bibliografia.bib}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}
+    {Capítulo \thechapter}
+    {10pt}
+    {\Huge}
+
+\titlespacing*{\chapter}
+    {0pt}
+    {0pt}
+    {25pt}
+
+% ------------------------------------------------------------
+% Datos del trabajo
+% ------------------------------------------------------------
+\newcommand{\tituloTrabajo}{Computación óptica}
+\newcommand{\autorTrabajo}{Tomás Achával Berzero}
+\newcommand{\directorTrabajo}{Dr. Federico Pont}
+\newcommand{\codirectorTrabajo}{Dr. Ing. James Kunst}
+\newcommand{\fechaTrabajo}{\today}
+
+
+\begin{document}
+
+% HOJA EN BLANCO INICIAL — guarda
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+% CARÁTULA
+\thispagestyle{empty}
+
+\begin{center}
+
+    % Logos
+    \begin{minipage}[t]{\textwidth}
+        \raggedright
+        \IfFileExists{logos/unc.png}
+            {\includegraphics[height=1.7cm]{logos/unc.png}}
+            {\fbox{\rule{0pt}{1.5cm}\rule{3cm}{0pt}}}
+        \hfill
+        \IfFileExists{logos/famaf.png}
+            {\includegraphics[height=1.7cm]{logos/famaf.png}}
+            {\fbox{\rule{0pt}{1.5cm}\rule{3cm}{0pt}}}
+    \end{minipage}
+
+    \vspace{3cm}
+
+    {\Huge\bfseries \tituloTrabajo\par}
+
+    \vspace{0.7cm}
+
+    {\Large Trabajo Especial de Licenciatura\par}
+
+    \vspace{1.5cm}
+
+    por
+
+    \vspace{0.3cm}
+
+    {\Large \autorTrabajo\par}
+
+    \vspace{2cm}
+
+    Presentado ante la Facultad de Matemática, Astronomía, Física y
+    Computación como parte de los requerimientos para la obtención del
+    grado de Licenciado en Ciencias de la Computación de la
+
+    \vspace{0.4cm}
+
+    {\large\bfseries UNIVERSIDAD NACIONAL DE CÓRDOBA\par}
+
+    \vspace{1.5cm}
+
+    {\large \fechaTrabajo\par}
+
+    \vfill
+
+    \begin{large}
+        \textbf{Director:} \directorTrabajo
+
+        \vspace{0.3cm}
+
+        \textbf{Co-Director:} \codirectorTrabajo
+    \end{large}
+
+\end{center}
+
+\clearpage
+
+% RESUMEN
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+% Escribir aquí el resumen en castellano.
+
+\vspace{1cm}
+
+\noindent\textbf{Palabras clave:}
+
+\clearpage
+
+% ABSTRACT
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+% Write the abstract in English here.
+
+\vspace{1cm}
+
+\noindent\textbf{Keywords:}
+
+\clearpage
+
+
+% AGRADECIMIENTOS
+\chapter*{Agradecimientos}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+
+% Opcional.
+
+\clearpage
+
+% ÍNDICE
+\tableofcontents
+\clearpage
+
+% CONTENIDO
+\chapter{Introducción}
+
+\section{Motivación}
+
+\section{Objetivos}
+
+\section{Organización del trabajo}
+
+
+\chapter{Orígenes de la computación óptica}
+
+Invención del láser 1960
+
+\section{Primeras propuestas}
+
+Señales de radar
+
+DOC-II
+
+Pattern recognition
+
+Memoria Optica (CDs)
+
+\section{Computación óptica digital}
+
+Más detalles de la DOC-II
+
+\section{Consolidación de la electrónica}
+
+Ley de Moore
+
+Avances en los procesos de fabricación
+
+Problemas con el tamaño y accesibilidad de los dispositivos
+
+
+\chapter{Fundamentos físicos}
+
+En este capítulo se presentarán los fundamentos físicos que permiten maniplar luz con luz, habilitando el paradigma de computación all-optical.
+
+\section{Formas de describir la luz}
+
+\section{Propagación e Interferencia}
+
+\subsection{No linealidades}
+
+\section{Dispositivos ópticos básicos}
+
+Delay Lines.
+Mach-Zehnder.
+Memoria óptica (CDs).
+
+
+\chapter{Modelado y simulación}
+Para comprender en profundidad el funcionamiento de los dispositivos ópticos, se llevó a cabo la simulación de un transistor all-optical basado en un interferómetro Mach-Zehnder que contiene una no linealidad óptica de tipo III en una de sus ramas.
+
+\section{Proceso de modelado}
+
+\section{Metodología de simulación}
+
+\section{Circuitos ópticos}
+
+\section{Resultados}
+
+
+
+\chapter{Resurgimiento de la computación óptica}
+
+\section{Limitaciones de la electrónica}
+
+Frecuencia del clock.
+
+Temperatura.
+
+Ley de moore actual.
+
+\section{Materiales y procesos de fabricación}
+
+\subsection{Primeros materiales}
+\subsection{Silicon photonics}
+
+\section{El avance de las interconexiones ópticas}
+
+\section{Eficiencia energética}
+
+
+
+\chapter{Arquitecturas ópticas modernas}
+
+\section{Aceleradores ópticos}
+
+\section{Computación all-optical}
+
+\subsection{Akhetonics}
+
+Subsección destinada a la entrevista con kissner (idealmente a la segunda, en enero/febrero).
+
+\subsection{Principales desafíos técnicos}
+
+\subsection{Realidad del consumo energético}
+
+\subsection{Escalabilidad}
+
+\section{Perspectivas futuras}
+
+
+\chapter{Conclusiones}
+Que esperar en los próximos años?
+
+
+% BIBLIOGRAFÍA
+\printbibliography[heading=bibintoc,title={Bibliografía}]
+
+% ANEXOS
+\appendix
+
+\chapter{Material complementario}
+
+% HOJA FINAL DE APROBACIÓN
+\clearpage
+\thispagestyle{empty}
+
+\vspace*{\fill}
+
+\begin{center}
+    \Large\textbf{Constancia de aprobación}
+\end{center}
+
+\vspace{1cm}
+
+% Hoja destinada a la constancia de correspondencia entre
+% la versión presentada y la versión aprobada por el tribunal.
+
+\vspace{3cm}
+
+\noindent
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    Firma
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    Firma
+\end{minipage}
+
+\vspace*{\fill}
+
+% HOJA EN BLANCO FINAL — guarda
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+
+\end{document}
