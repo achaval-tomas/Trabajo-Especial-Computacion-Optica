@@ -1,0 +1,319 @@
+% ============================================================
+% Trabajo Especial de Licenciatura en Ciencias de la Computación
+% FAMAF - Universidad Nacional de Córdoba
+% ============================================================
+
+\documentclass[12pt,a4paper]{report}
+
+% Idioma y tipografía
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{Noto Serif}}
+
+% Página y formato de capítulos
+\usepackage[
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3cm,
+    right=2.5cm
+]{geometry}
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}
+  {Capítulo \thechapter}
+  {2pt}
+  {}
+\titlespacing*{\chapter}{0pt}{-15pt}{25pt}
+
+% Matemática, figuras y tablas
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+% Referencias cruzadas e hipervínculos
+\usepackage[
+    hidelinks,
+    bookmarks
+]{hyperref}
+\usepackage[
+    capitalise,
+    nameinlink
+]{cleveref}
+\crefname{section}{Sección}{Secciones}
+\crefname{subsection}{Subsección}{Subsecciones}
+
+% Bibliografía
+\usepackage[
+    backend=biber,
+    %style=plain,
+    language=spanish,
+    autolang=hyphen,
+    isbn=false,
+    uniquename=false,
+    abbreviate=false
+]{biblatex}
+\addbibresource{biblio.bib}
+
+% Encabezados y espaciado
+\usepackage{setspace}
+\setstretch{1.0}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\usepackage{fancyhdr}
+\setlength{\footskip}{0.8cm}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+% Datos del trabajo y metadatos del PDF
+\def\tituloTesis{Computación óptica}
+\hypersetup{
+  pdftitle={Computación óptica},
+  pdfauthor={Tomás Achával Berzero},
+  pdfsubject={Trabajo Especial de Licenciatura en Ciencias de la Computación},
+  pdfkeywords={computación óptica, fotónica, computación all-optical}
+}
+
+\begin{document}
+
+% Carátula
+\input{caratula}
+
+% RESUMEN
+\section*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+Debido al auge de la inteligencia artificial y al crecimiento exponencial de los centros de datos, la computación óptica ha resurgido como una alternativa prometedora para reducir el consumo energético manteniendo un alto rendimiento computacional. En este trabajo analizaremos la evolución histórica de este paradigma, repasando sus primeras propuestas, los dispositivos ópticos fundamentales y las razones por las que la electrónica basada en silicio se consolidó como el estándar dominante. Luego estudiaremos los avances que impulsan su resurgimiento, incluyendo las limitaciones actuales de la electrónica y las ventajas que las tecnologías ópticas pueden ofrecer frente a ellas. Profundizaremos en los fundamentos físicos detrás de los dispositivos ópticos avanzados que permiten el procesamiento de información mediante luz. Luego realizaremos simulaciones con el objetivo de entender las principales características de los circuitos ópticos y las razones por las que se proponen diferentes paradigmas a los usados tradicionalmente. Finalmente, examinaremos arquitecturas ópticas modernas, con especial énfasis en los sistemas “all-optical”, sus desafíos técnicos, su potencial para mejorar la eficiencia energética de los centros de datos y las perspectivas futuras de esta tecnología.
+
+\vspace{1cm}
+\noindent\textbf{Palabras clave:}
+Computación Óptica, Fotónica, Consumo Energético
+
+\clearpage
+
+% ABSTRACT
+\section*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Due to the rise of artificial intelligence and the exponential growth of data centers, optical computing has re-emerged as a promising alternative for reducing energy consumption while maintaining high computational performance. In this work, we will analyze the historical evolution of this paradigm, reviewing its earliest proposals, the fundamental optical devices, and the reasons why silicon-based electronics became the dominant standard. We will then examine the advances driving its resurgence, including the current limitations of electronics and the advantages that optical technologies may offer over them. We will explore in depth the physical principles underlying advanced optical devices that enable information processing using light. We will then conduct simulations to understand the main characteristics of optical circuits and the reasons for proposing paradigms that differ from those traditionally used. Finally, we will examine modern optical architectures, with particular emphasis on all-optical systems, their technical challenges, their potential to improve the energy efficiency of data centers, and the future prospects of this technology.
+
+\vspace{1cm}
+\noindent\textbf{Keywords:}
+Optical Computing, Photonic Computing, Energy Crisis
+
+\clearpage
+
+% AGRADECIMIENTOS
+\section*{Agradecimientos}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+
+% Opcional.
+
+\clearpage
+
+% ÍNDICE
+\tableofcontents
+\clearpage
+
+% CONTENIDO
+\chapter{Introducción}
+
+La computación óptica no es una idea nueva. Desde que se inventó el láser en los 60's hubo múltiples propuestas e ideas prometedoras de utilizar luz para representar datos y realizar cálculos de manera tanto analógica como digital. El foco no fué siempre el mismo, variando entre intentar aprovechar la alta capacidad de paralelismo, la eficiencia energética que se puede alcanzar, y muchos casos de uso especiales donde las propiedades de la luz traen claros beneficios frente a la electrónica.
+
+El interés en las tecnologías ópticas fue muy alto hasta principios de los años 2000. Algunas propuestas lograron construirse, pero ninguna logró ser adoptada a gran escala. Esto se debió, entre otras cosas, a los increíbles avances en la computación electrónica que todos conocemos. Cabe destacar que la óptica ha triunfado en el área de comunicaciones, tanto a larga distancia como más recientemente a distancias cortas entre nodos de centros de datos. Si continúa la tendencia hacia una totalidad de interconexiones ópticas, el cómputo electrónico y las conversiones luz-electricidad que este conlleva serían un potencial cuello de botella~\cite{kissner2024}.
+
+En este trabajo revisaremos los orígenes de esta tecnología y compararemos el contexto de aquel momento con la actualidad, con el objetivo de fundamentar las razones por las que su resurgimiento puede marcar una diferencia a nivel global. Más aún, estudiaremos los dispositivos ópticos que se utilizan y los conceptos físicos que describen las interacciones de la luz con materiales o con más luz. Tras modelar y simular algunos de estos dispositivos, explicaremos las ideas que definen las arquitecturas ópticas actuales, sus beneficios, sus desafíos, y sus perspectivas futuras.
+
+
+\section{Organización del trabajo}
+
+El resto del trabajo está organizado de la siguiente forma. En el capítulo 2 se repasa el marco histórico de la computación óptica. En el capitulo 3 se presenta una descripción física de la luz y se explican las propiedades y dispositivos básicos que permiten utilizarla para realizar cómputo. En el capítulo 4 se explica el proceso de modelado y simulación de circuitos y dispositivos ópticos. El capítulo 5 fundamenta el actual resurgimiento de interés en estas tecnologías. En el capítulo 6 se explica el funcionamiento de las arquitecturas más avanzadas del momento y sus perspectivas futuras, incluyendo una breve entrevista al CEO de Akhetonics, empresa alemana que recientemente fabricó un procesador óptico. El capítulo 7 presenta las conclusiones del trabajo junto a posibles trabajos futuros.
+
+\chapter{Orígenes de la computación óptica}
+
+El interés en el procesamiento de información de manera óptica surge en gran parte tras la invención del láser, en el año 1960~\cite{history_optical_computing}. Existieron ideas antes de ello, pero todas fueron de carácter más bien experimental como métodos de prueba para telescopios y microscopios.
+
+\section{Primeras propuestas}
+
+En la década del 60 aparecen ideas de procesamiento con luz. La arquitectura más común consistía en utilizar una serie de capas. La primera capa generaba una representación óptica de los datos a procesar, la segunda capa consistía de uno o más dispositivos ópticos que realizaban transformaciones a los datos y la última capa estaba dedicada a la detección de luz o imágenes de llegada. El proceso consistía en emitir ya sea un rayo de luz o una imagen (un plano de píxeles en paralelo) que atravesaría lentes, moduladores, elementos holográficos, entre otros dispositivos, hasta llegar a una cámara o fotodetector. En general, el resto del cómputo y el control de estos dispositivos se realizaba de manera electrónica.
+
+Esta arquitectura permitió el desarrollo de dispositivos como correladores: elementos ópticos utilizados para reconocimiento de patrones. Estos dispositivos determinan el nivel de correlación entre una imagen entrante y una de referencia aprovechando la transformada de Fourier que un lente realiza naturalmente sobre la luz que lo atraviesa. En el momento, se consideraba a los correladores en tiempo real como una de las áreas más prometedoras para la computación óptica.
+
+Entre 1960 y 1980, el interés en el procesamiento óptico de la información crece de manera progresiva. Uno de los objetivos principales era desarrollar un modulador espacial (bidimensional) de alta calidad y accesible que permita manipular imágenes en paralelo. 
+
+En este período también hubo avances en las tecnologías de almacenamiento ópticas. Entre ellas, destacaron las memorias ópticas holográficas y otras propuestas tridimensionales de alta densidad de almacenamiento. Un beneficio de la memoria holográfica era la posibilidad de lectura en paralelo. El ejemplo más conocido de almacenamiento óptico que existe hoy en día son los discos compactos (CDs) que a pesar de ser muy utilizados, no fueron integrados en ninguna arquitectura de computación puramente óptica. El principal problema de la memoria óptica siempre ha sido la velocidad de escritura, ya que esta suele depender de cambios en propiedades de materiales los cuales llevan un tiempo alto en hacerse efectivos en relación a las velocidades de procesamiento.
+
+A partir de 1980 y hasta aproximadamente 2004, la computación óptica fue un tema de muy alto interés que recibió grandes inversiones en investigación y desarrollo. A continuación se destacarán algunos de los principales logros:
+
+\begin{itemize}
+    \item En 1982 se construyó y utilizó un procesador óptico para detectar trayectorias en un experimento físico de alta energía. Este utilizaba una matriz de LEDs como entrada y una matriz de kinoforms (pequeños elementos ópticos que alteran las propiedades de la luz que los atraviesa) como plano de procesamiento~\cite{kinoforms}.
+    \item En 1986 se desarrolló un procesador de propósito especial basado en una matriz de hologramas grabados ópticamente~\cite{ambsHoughTransform}, el cual luego fue mejorado mediante la utilización de elementos ópticos difractivos (DOEs).
+    \item Alrededor del año 1990 surge la propuesta de la Digital Optical Computer II (DOC-II) por OptiComp Corporation~\cite{docII}, siendo esta una de las más importantes y populares de la época. En la siguiente sección se explicará brevemente su funcionamiento y los dispositivos ópticos que premitieron su construcción.
+    \item En el área de almacenamiento, en 1995 se desarrolló un sistema para discos ópticos prometiendo hasta 1.2GB/s de lectura direccionable y paralelizada mediante el uso de un cabezal fijo~\cite{opticalmemory}. De todas formas, este tipo de memoria siempre tuvo una gran limitación que era el tiempo de escritura, muy necesario para lograr computación óptica de propósito general.
+    \item En el año 2009, el Jet Propulsion Laboratory (JPL) de la NASA presentó mejoras en sus sistemas de reconocimiento automático de objetivos utilizando correladores ópticos, muy estudiados en los años anteriores, junto a redes neuronales que aplican un paso de post-procesamiento~\cite{JPLATR}.
+\end{itemize}
+
+\section{Computación óptica digital}
+
+Muchos de los procesadores mencionados anteriormente eran analógicos. Es decir, se basaban en propiedades físicas de la luz para representar los datos y realizar cómputo, aprovechando fenómenos como la transformada de Fourier, la modulación de fase y amplitud de estas ondas, entre otros.
+
+Por otro lado, el procesamiento digital estaba ganando importancia a medida que la electrónica mejoraba continuamente. En este paradigma, los datos se representan con 1s y 0s, y las operaciones se realizan principalmente a través de un dispositivo: el transistor.
+
+Para competir con la electrónica del momento, OptiComp Corporation propuso una serie de procesadores ópticos digitales de propósito general. Entre ellos el que tuvo mayor reconocimiento fue la llamada DOC-II. Esta computadora logró ser casi all-optical, requiriendo algunos pasos de cómputo electrónico en cada ciclo de procesamiento.
+
+\section{Consolidación de la electrónica}
+
+\begin{itemize}[nosep]
+    \item Ley de Moore.
+    \item Avances en los procesos de fabricación.
+    \item Problemas con el tamaño y la accesibilidad de los dispositivos.
+\end{itemize}
+
+
+\chapter{Fundamentos físicos}
+
+En este capítulo se presentarán los fundamentos físicos que permiten manipular luz con luz, habilitando el paradigma de computación all-optical. Para ello resulta útil presentar antes algunos conceptos simples.
+
+La \textbf{velocidad de la luz} se representa ... y depende de ...
+
+El \textbf{índice de refracción} es una propiedad de cada material y permite predecir los cambios que ocurrirán en la velocidad y dirección de un haz de luz que los atraviesa.
+
+
+
+\section{Formas de describir la luz}
+
+Para poder entender las interacciones de una onda de luz con materiales o con otra onda de luz, es conveniente establecer un modelo matemático. Hay muchas formas de describir la luz en distintos niveles de abstracción, dependiendo de la escala a la que se trabaje. Algunas de ellas son las siguientes:
+
+\medskip
+\begin{itemize}[nosep]
+    \item \textbf{La luz en forma de rayos.} Es la abstracción más simple. Aquí la luz se visualiza como una línea recta cuando se mueve a través de un material homogéneo, describiendo de forma precisa los comportamientos a grandes escalas. Resulta útil para entender principios básicos como el comportamiento de la luz a través de materiales con distintos índices de refracción. Para nuestro caso de estudio, esta forma de describir la luz resulta insuficiente.
+    \item \textbf{La luz en forma de ondas.} La luz se describe mediante una ecuación compleja y armónica respecto al tiempo. Esto nos permitirá explicar el fenómeno de interferencia, uno de los más importantes en el mundo del procesamiento de datos ópticos. Es el nivel de abstracción más práctico para nuestro caso de estudio.
+    \item \textbf{La luz como onda electromagnética.} Se divide a la luz en dos ondas que describen un campo eléctrico y magnético que avanzan a la par de manera ortogonal. Permite modelar fenómenos más complejos, fuera del alcance de este trabajo.
+\end{itemize}
+
+
+
+\section{Propagación e interferencia}
+
+\subsection{No linealidades}
+
+\section{Dispositivos ópticos básicos}
+
+\begin{itemize}[nosep]
+    \item Delay lines.
+    \item Interferómetro Mach-Zehnder.
+    \item Memoria óptica (CDs).
+\end{itemize}
+
+
+\chapter{Modelado y simulación}
+
+Para comprender en profundidad el funcionamiento de los dispositivos ópticos, se llevó a cabo la simulación de un transistor all-optical basado en un interferómetro Mach-Zehnder que contiene una no linealidad óptica de tipo III en una de sus ramas.
+
+\section{Proceso de modelado}
+
+\section{Metodología de simulación}
+
+\section{Circuitos ópticos}
+
+\section{Resultados}
+
+
+\chapter{Resurgimiento de la computación óptica}
+
+\section{Limitaciones de la electrónica}
+
+\begin{itemize}[nosep]
+    \item Frecuencia del clock.
+    \item Temperatura.
+    \item Ley de Moore actual.
+\end{itemize}
+
+\section{Materiales y procesos de fabricación}
+
+\subsection{Primeros materiales}
+
+\subsection{Silicon photonics}
+
+\section{El avance de las interconexiones ópticas}
+
+\section{Eficiencia energética}
+
+
+\chapter{Arquitecturas ópticas modernas}
+
+\section{Aceleradores ópticos}
+
+\section{Computación all-optical}
+
+\subsection{Akhetonics}
+
+Subsección destinada a la entrevista con Kissner (idealmente, una segunda entrevista en enero/febrero).
+
+\subsection{Principales desafíos técnicos}
+
+\subsection{Realidad del consumo energético}
+
+\subsection{Escalabilidad}
+
+\section{Perspectivas futuras}
+
+
+\chapter{Conclusiones}
+
+¿Qué esperar en los próximos años?
+
+% BIBLIOGRAFÍA
+\printbibliography[heading=bibintoc,title={Bibliografía}]
+
+% ANEXOS
+\appendix
+\chapter{Material complementario}
+
+% HOJA FINAL DE APROBACIÓN
+\clearpage
+\thispagestyle{empty}
+\vspace*{\fill}
+
+\begin{center}
+    \Large\textbf{Constancia de aprobación}
+\end{center}
+
+\vspace{1cm}
+
+% Hoja destinada a la constancia de correspondencia entre
+% la versión presentada y la versión aprobada por el tribunal.
+
+\vspace{3cm}
+
+\noindent
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    Firma
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    Firma
+\end{minipage}
+
+\vspace*{\fill}
+
+\end{document}

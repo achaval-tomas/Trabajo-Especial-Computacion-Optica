@@ -1,0 +1,60 @@
+% Carátula independiente. Se incluye desde Tesis.tex con \input{Carátula}.
+
+\begin{center}
+\thispagestyle{empty}
+
+\vspace{0.5cm}
+\begin{minipage}[t]{\textwidth}
+    \raggedright
+    \IfFileExists{logos/unc.jpg}
+        {\includegraphics[height=1.7cm]{logos/unc.jpg}}
+        {\fbox{\rule{0pt}{1.5cm}\rule{3cm}{0pt}}}
+    \hfill
+    \IfFileExists{logos/famaf.png}
+        {\includegraphics[height=1.7cm]{logos/famaf.png}}
+        {\fbox{\rule{0pt}{1.5cm}\rule{3cm}{0pt}}}
+\end{minipage}
+
+\vspace{3cm}
+
+{\Huge\bfseries \tituloTesis\par}
+
+\vspace{0.7cm}
+
+{\Large Trabajo Especial de Licenciatura\par}
+
+\vspace{1.5cm}
+
+por
+
+\vspace{0.3cm}
+
+{\Large Tomás Achával Berzero\par}
+
+\vspace{2cm}
+
+Presentado ante la Facultad de Matemática, Astronomía, Física y
+Computación como parte de los requerimientos para la obtención del
+grado de Licenciado en Ciencias de la Computación de la
+
+\vspace{0.4cm}
+
+{\large\bfseries UNIVERSIDAD NACIONAL DE CÓRDOBA\par}
+
+\vspace{1.5cm}
+
+{\large \today\par}
+
+\vfill
+
+\begin{large}
+    \textbf{Director:} Dr. Federico Pont
+
+    \vspace{0.3cm}
+
+    \textbf{Co-Director:} Dr. Ing. James Kunst
+\end{large}
+
+\end{center}
+
+\clearpage
