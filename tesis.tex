@@ -133,7 +133,7 @@ Optical Computing, Photonic Computing, Energy Crisis
 % CONTENIDO
 \chapter{Introducción}
 
-La computación óptica no es una idea nueva. Desde que se inventó el láser en los 60's hubo múltiples propuestas e ideas prometedoras de utilizar luz para representar datos y realizar cálculos de manera tanto analógica como digital. El foco no fué siempre el mismo, variando entre intentar aprovechar la alta capacidad de paralelismo, la eficiencia energética que se puede alcanzar, y muchos casos de uso especiales donde las propiedades de la luz traen claros beneficios frente a la electrónica.
+La computación óptica no es una idea nueva. Desde que se inventó el láser en los 60's hubo múltiples propuestas e ideas prometedoras de utilizar luz para representar datos y realizar cálculos de manera tanto analógica como digital. El foco no fue siempre el mismo, variando entre intentar aprovechar la alta capacidad de paralelismo, la eficiencia energética que se puede alcanzar, y muchos casos de uso especiales donde las propiedades de la luz traen claros beneficios frente a la electrónica.
 
 El interés en las tecnologías ópticas fue muy alto hasta principios de los años 2000. Algunas propuestas lograron construirse, pero ninguna logró ser adoptada a gran escala. Esto se debió, entre otras cosas, a los increíbles avances en la computación electrónica que todos conocemos. Cabe destacar que la óptica ha triunfado en el área de comunicaciones, tanto a larga distancia como más recientemente a distancias cortas entre nodos de centros de datos. Si continúa la tendencia hacia una totalidad de interconexiones ópticas, el cómputo electrónico y las conversiones luz-electricidad que este conlleva serían un potencial cuello de botella~\cite{kissner2024}.
 
@@ -146,7 +146,7 @@ El resto del trabajo está organizado de la siguiente forma. En el capítulo 2 s
 
 \chapter{Orígenes de la computación óptica}
 
-El interés en el procesamiento de información de manera óptica surge en gran parte tras la invención del láser, en el año 1960~\cite{history_optical_computing}. Existieron ideas antes de ello, pero todas fueron de carácter más bien experimental como métodos de prueba para telescopios y microscopios.
+El interés en el procesamiento de información de manera óptica surge en gran parte tras la invención del láser, en el año 1960~\cite{history_optical_computing}. Existieron ideas antes de ello, pero todas fueron de carácter más bien experimental como métodos de prueba para telescopios y microscopios. En este capítulo haremos un repaso de las primeras propuestas concretas, presentaremos el paradigma de la computación óptica digital y analizaremos las razones por las que la electrónica superó ampliamente a la óptica en los procesadores.
 
 \section{Primeras propuestas}
 
@@ -170,20 +170,29 @@ A partir de 1980 y hasta aproximadamente 2004, la computación óptica fue un te
 
 \section{Computación óptica digital}
 
-Muchos de los procesadores mencionados anteriormente eran analógicos. Es decir, se basaban en propiedades físicas de la luz para representar los datos y realizar cómputo, aprovechando fenómenos como la transformada de Fourier, la modulación de fase y amplitud de estas ondas, entre otros.
+Muchos de los procesadores mencionados anteriormente eran analógicos. Es decir, se basaban en propiedades físicas de la luz para representar datos y realizar cómputo, aprovechando fenómenos como la transformada de Fourier, la modulación de fase y amplitud de las ondas, entre otros. Por otro lado, el procesamiento digital estaba ganando importancia a medida que la electrónica mejoraba continuamente. En este paradigma los datos se representan de forma binaria, con '1's y '0's.
 
-Por otro lado, el procesamiento digital estaba ganando importancia a medida que la electrónica mejoraba continuamente. En este paradigma, los datos se representan con 1s y 0s, y las operaciones se realizan principalmente a través de un dispositivo: el transistor.
+Para competir con la electrónica del momento, OptiComp Corporation propuso una serie de procesadores ópticos digitales de propósito general. Entre ellos el que tuvo mayor reconocimiento fue la llamada Digital Optical Computer II (DOC-II). Esta computadora logró ser casi "all-optical", requiriendo algunos pasos electrónicos en cada ciclo de procesamiento. A continuación explicaremos brevemente sus componentes más relevantes.
 
-Para competir con la electrónica del momento, OptiComp Corporation propuso una serie de procesadores ópticos digitales de propósito general. Entre ellos el que tuvo mayor reconocimiento fue la llamada DOC-II. Esta computadora logró ser casi all-optical, requiriendo algunos pasos de cómputo electrónico en cada ciclo de procesamiento.
+\subsection{Arquitectura óptica de la DOC-II}
+
+La sección principal de la DOC-II era el procesador óptico que realizaba cálculos de una forma muy simple~\cite{docII-arquitectura}. El principio de operación consistía en realizar multiplicaciones matriz-vector booleanas, a través de las cuales se puede implementar cualquier tipo de operacion haciendo uso del teorema de expansión de Shannon. Para lograr esto, el procesador se dividía en 3 planos: uno de entrada, uno de procesamiento y uno de detección o lectura.
+
+El plano de entrada consistía en convertir los datos a procesar, que se encontraban en formato electrónico digital, en pulsos de luz. Estos datos conformaban un vector de pulsos que representaban cada bit de un dato y su complemento, ambos necesarios para poder implementar cualquier operación según el teorema antes mencionado. Es decir, si el procesador se diseña para datos de N bits, este vector tendría 2N componentes donde N de ellos estarían iluminados (ya sea cada bit que esté originalmente en 1 o su complemento).
+
+Los pulsos emitidos por el primer plano viajarían hacia el segundo, conformado por una matriz de celdas configurables a través de modulación acustoóptica. Cada dato emitido se distribuye para iluminar una fila completa de la matriz, y las filas son de un ancho arbitrario. La modulación acustoóptica consiste en aplicar una señal eléctria oscilante a un transductor adherido a un material, por ejemplo un vidrio. Esto hace vibrar al transductor y genera ondas sonoras que viajan a través del material. Las ondas cambian el índice de refracción del material causando que la luz que lo atraviesa se desvíe en ángulos controlables. Utilizando estas propiedades, el plano de procesamiento podía ser pre-configurado electrónicamente para que la luz que pasa por cada celda de la matriz continúe hacia el plano de detección o se desvíe. La salida de cada columna de la matriz se enfoca en una celda del plano de detección, que es un vector de longitud arbitraria (misma longitud que el ancho de cada fila de la matriz) compuesto por fotodetectores.
+
+Este diseño esencialmente realiza una multiplicación puramente óptica entre el vector de entrada y la matriz configurable del plano de operación (donde las celdas que desvían luz son '0's y las que permiten el paso son '1's) logrando así un procesador óptico de propósito general.
+
+Lo anterior es una descripción simplificada de una arquitectura que involucraba muchos más componentes ópticos y electrónicos, pero nos permite entender la idea principal de computación óptica en aquel momento. La DOC-II fue construida y utilizada, aunque no llegó al punto de ser comercializada. Funcionaba a una frecuencia de 100MHz, con una tasa de entrada de datos de 12.8Gbps, logrando más de 1 tera operaciones binarias por segundo (comparable a los circuitos integrados electrónicos más avanzados del momento) y con un consumo energético de tan solo 2W en el cómputo óptico y alrededor de 100W teniendo en cuenta la electrónica.
 
 \section{Consolidación de la electrónica}
 
-\begin{itemize}[nosep]
-    \item Ley de Moore.
-    \item Avances en los procesos de fabricación.
-    \item Problemas con el tamaño y la accesibilidad de los dispositivos.
-\end{itemize}
+A pesar de una fuerte época de desarrollo entre los años 1980 y 2000, la computación óptica no logró salir del ámbito de investigación y los laboratorios para comercializarse a nivel global. La electrónica, en cambio, se convirtió en el estándar dominante y lo sigue siendo hoy en día. En esta sección presentaremos algunas de las razones por las que esto ocurrió y analizaremos si aún se mantienen o se han debilitado con el tiempo.
 
+La primera de ellas, y la más popular de todas, es la Ley de Moore. Definida por Gordon Moore en 1965 y retocada en 1975 tras algunas observaciones. La última versión establecía que los avances en la electrónica iban a permitir duplicar la cantidad de componentes en un procesador cada dos años (cada un año en la teoría original). Esto también indicaría una reducción en el costo por componente y un aumento de la complejidad de cómputo que un procesador podía realizar. Para su sorpresa esta predicción fue acertada durante un gran período de tiempo. La mejora continua llevó a la electrónica a acercarse a límites físicos ya sea de disipación de calor o del tamaño y posibilidad de fabricación de cada componente, reduciendo significativamente el ritmo al que estos procesadores mejoran~\cite{leyDeMoore}. Este último fenómeno hace que desde los años 2000 se requieran avances extremadamente complejos acompañados de grandes inversiones para seguir mejorando las tecnologías. Uno de los avances más destacados ha sido la mejora en las técnicas de litografía con láseres ultravioletas.
+
+Por otro lado, la computación óptica se enfrentaba a problemas con el tamaño y la accesibilidad de los dispositivos que se considereban ideales para el momento. Los moduladores espaciales de luz, generalmente compuestos por una matriz de píxeles controlables individualmente que permiten modificar la luz incidente, fueron inicialmente un factor limitante y luego un foco de desarrollo con muchísimos avances introduciendo más de 50 variedades entre los 80s y 90s. A pesar de estos avances, seguían teniendo costos relativamente altos y una calidad no del todo ideal.
 
 \chapter{Fundamentos físicos}
 
@@ -223,9 +232,19 @@ Para poder entender las interacciones de una onda de luz con materiales o con ot
 
 \chapter{Modelado y simulación}
 
-Para comprender en profundidad el funcionamiento de los dispositivos ópticos, se llevó a cabo la simulación de un transistor all-optical basado en un interferómetro Mach-Zehnder que contiene una no linealidad óptica de tipo III en una de sus ramas.
+Este capítulo se centrará en el uso de la herramienta de código abierto Lunima~\cite{lunima} para el diseño y simulación de dispositivos y circuitos ópticos. Está actualmente en una fase de desarrollo continuo y tiene el apoyo de Akhetonics, empresa alemana cuyo foco principal es construir un procesador completamente óptico de propósito general. La elección de la herramienta se fundamenta en la novedad de la misma, notando que sus funcionalidades responden a las necesidades modernas del diseño óptico en la industria.
+
+Otra opcion considerada fue simular numéricamente las interacciones físicas de la luz a través de distintos materiales y componentes ópticos. Esta posibilidad fue descartada debido a que, a pesar de que ayuda a comprender lo que ocurre dentro de cada componente, se aleja del concepto de cómputo en si.
 
 \section{Proceso de modelado}
+
+Dentro de Lunima se puede encontrar una librería de elementos ópticos y optoelectrónicos con sus propiedades y dimensiones reales, cada uno catalogado bajo su proceso de fabricación. Cada dispositivo se puede colocar en un chip de silicio sobre aislante que conforma un plano inicialmente vacío. Una vez colocados, la herramienta permite interconectarlos fácilmente y ajusta automáticamente las curvaturas de las guias de onda intermedias para que sean óptimas en cuanto a pérdida y posibilidad de fabricación.
+
+\subsection{Avances en el diseño agéntico}
+
+El diseño agéntico es el concepto de permitir que agentes de inteligencia artificial (IA) utilicen este tipo de programas para estructurar circuitos, ya sea electrónicos u ópticos, facilitando la creación de chips complejos con cantidades considerables de componentes e interconexiones. Esto es cada vez mas común en la industria a medida que los modelos de IA mejoran, por lo que es importante considerar herramientas que estén desarrolladas con el diseño agéntico en mente.
+
+Lunima permite conectar un agente al que se le dan todas las capacidades del usuario. Debido a que los circuitos se modelan en un lenguaje propio y estandarizado (.lun), los agentes pueden fácilmente comprender estructuras y realizar modificaciones.
 
 \section{Metodología de simulación}
 
