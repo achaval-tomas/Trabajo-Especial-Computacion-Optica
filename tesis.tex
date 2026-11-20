@@ -156,7 +156,7 @@ Esta arquitectura permitió el desarrollo de dispositivos como correladores: ele
 
 Entre 1960 y 1980, el interés en el procesamiento óptico de la información crece de manera progresiva. Uno de los objetivos principales era desarrollar un modulador espacial (bidimensional) de alta calidad y accesible que permita manipular imágenes en paralelo. 
 
-En este período también hubo avances en las tecnologías de almacenamiento ópticas. Entre ellas, destacaron las memorias ópticas holográficas y otras propuestas tridimensionales de alta densidad de almacenamiento. Un beneficio de la memoria holográfica era la posibilidad de lectura en paralelo. El ejemplo más conocido de almacenamiento óptico que existe hoy en día son los discos compactos (CDs) que a pesar de ser muy utilizados, no fueron integrados en ninguna arquitectura de computación puramente óptica. El principal problema de la memoria óptica siempre ha sido la velocidad de escritura, ya que esta suele depender de cambios en propiedades de materiales los cuales llevan un tiempo alto en hacerse efectivos en relación a las velocidades de procesamiento.
+En este período también hubo avances en las tecnologías de almacenamiento ópticas. Entre ellas, destacaron las memorias ópticas holográficas y otras propuestas tridimensionales de alta densidad de almacenamiento. Un beneficio de la memoria holográfica era la posibilidad de lectura en paralelo. El ejemplo más conocido de almacenamiento óptico que existe hoy en día son los discos (CD y DVD) que a pesar de ser muy utilizados, no fueron integrados en ninguna arquitectura de computación puramente óptica. El principal problema de la memoria óptica siempre ha sido la velocidad de escritura, ya que esta suele depender de cambios en propiedades de materiales los cuales llevan un tiempo alto en hacerse efectivos en relación a las velocidades de procesamiento.
 
 A partir de 1980 y hasta aproximadamente 2004, la computación óptica fue un tema de muy alto interés que recibió grandes inversiones en investigación y desarrollo. A continuación se destacarán algunos de los principales logros:
 
@@ -192,6 +192,8 @@ A pesar de una fuerte época de desarrollo entre los años 1980 y 2000, la compu
 
 La primera de ellas, y la más popular de todas, es la Ley de Moore. Definida por Gordon Moore en 1965 y retocada en 1975 tras algunas observaciones. La última versión establecía que los avances en la electrónica iban a permitir duplicar la cantidad de componentes en un procesador cada dos años (cada un año en la teoría original). Esto también indicaría una reducción en el costo por componente y un aumento de la complejidad de cómputo que un procesador podía realizar. Para su sorpresa esta predicción fue acertada durante un gran período de tiempo. La mejora continua llevó a la electrónica a acercarse a límites físicos ya sea de disipación de calor o del tamaño y posibilidad de fabricación de cada componente, reduciendo significativamente el ritmo al que estos procesadores mejoran~\cite{leyDeMoore}. Este último fenómeno hace que desde los años 2000 se requieran avances extremadamente complejos acompañados de grandes inversiones para seguir mejorando las tecnologías. Uno de los avances más destacables ha sido la mejora en las técnicas de litografía con láseres ultravioletas.
 
+VELOCIDAD DE CLOCK
+
 Por otro lado, la computación óptica se enfrentaba a problemas con el tamaño y la accesibilidad de los dispositivos que se considereban ideales para el momento~\cite{history_optical_computing}. Los moduladores espaciales de luz, generalmente compuestos por una matriz de píxeles controlables individualmente que permiten modificar la luz incidente, fueron inicialmente un factor limitante y luego un foco de desarrollo con muchísimos avances introduciendo más de 50 variedades entre los 80s y 90s. A pesar de estos avances, seguían teniendo costos relativamente altos y una calidad no del todo ideal.
 
 Otro punto fuerte de la electrónica fueron los continuos avances en sistemas de memoria. Existieron propuestas ópticas muy fuertes utilizando tecnologías que parecían ser prometedoras, como hologramas y almacenamiento tridimensional. La única que logró ser popular a nivel mundial fueron los DVDs, que incluso tuvieron desarrollos enfocados a la computación como la DVD-RAM de 1996~\cite{kissner2024}. Este tipo de memoria logró ser superior a sus mayores competidores del momento (discos duros y memorias flash) en múltiples métricas, incluso en costo por GB. Lamentablemente su baja compatibilidad con sistemas existentes fue una de las principales razones por las que no logró comercializarse a gran escala, y su desarrollo fue abandonado poco tiempo después mientras las tecnologías electrónicas seguían mejorando.
@@ -200,17 +202,19 @@ En conclusión, la industria vió un potencial de mejora exponencial en el mundo
 
 \chapter{Fundamentos físicos}
 
-En este capítulo se presentarán los fundamentos físicos que permiten manipular luz con luz, habilitando el paradigma de computación all-optical. Para ello resulta útil presentar antes algunos conceptos simples.
+En este capítulo presentaremos los fundamentos físicos que permiten manipular luz, habilitando el paradigma de computación all-optical. Una gran fuente de inspiración para las siguientes explicaciones ha sido el libro \textit{Fundamentals of Photonics}~\cite{FundamentalsOfPhotonics}.
 
-La \textbf{velocidad de la luz} se representa ... y depende de ...
+\section{Conceptos básicos}
 
-El \textbf{índice de refracción} es una propiedad de cada material y permite predecir los cambios que ocurrirán en la velocidad y dirección de un haz de luz que los atraviesa.
+Antes de adentrarnos en los modelos matemáticos con los que se puede describir a la luz, resulta útil familiarizarnos con algunos conceptos simples y reglas de notación.
 
+La \textbf{velocidad de la luz} se representa usualmente con la letra $c$. Utilizaremos también $c_0 \approx 300000km/s$ para referirnos a la velocidad de propagación de la luz en el vacío, siendo este valor el máximo que esta puede alcanzar.
 
+El \textbf{índice de refracción} es una propiedad de cada material y permite predecir los cambios que ocurrirán en la velocidad y dirección de un haz de luz que pasa de un material a otro. Este se denota con la letra $n$ y su valor está dado por $c_0/c$, donde $c$ es la velocidad de la luz a través del material. Notar que en el vacío se tiene que $n = c_0/c_0 = 1$ y que todos los materiales tienen un indice de refracción $n \geq 1$. Conociendo el indice de refracción de un material, también se puede calcular la velocidad de la luz propagándose a través de él como $c = c_0/n$.
 
 \section{Formas de describir la luz}
 
-Para poder entender las interacciones de una onda de luz con materiales o con otra onda de luz, es conveniente establecer un modelo matemático. Hay muchas formas de describir la luz en distintos niveles de abstracción, dependiendo de la escala a la que se trabaje. Algunas de ellas son las siguientes:
+Para poder entender las interacciones de una onda de luz con materiales o con otra onda de luz, es conveniente establecer un modelo matemático. Hay muchas formas de describir la luz en distintos niveles de abstracción, dependiendo de la escala a la que se trabaje y de los fenómenos que se deseen describir. Algunas de ellas son las siguientes:
 
 \medskip
 \begin{itemize}[nosep]
@@ -219,15 +223,71 @@ Para poder entender las interacciones de una onda de luz con materiales o con ot
     \item \textbf{La luz como onda electromagnética.} Se divide a la luz en dos ondas que describen un campo eléctrico y magnético que avanzan a la par de manera ortogonal. Permite modelar fenómenos más complejos, fuera del alcance de este trabajo.
 \end{itemize}
 
+\subsection{La luz en forma de ondas}
 
+El modelo matemático que mejor nos permite explicar los fenómenos más relevantes para la computación óptica es el de la luz en forma de ondas. La siguiente ecuación nos permite realizar un primer acercamiento a una descripción completa de una onda monocromática de luz:
 
-\section{Propagación e interferencia}
+{
+\large
+\begin{equation}
+\label{cosWave}
+    u(\mathbf{r},t) = a(\mathbf{r}) \cos\left[2\pi \nu t + \varphi(\mathbf{r})\right].
+\end{equation} 
+}
+
+donde
+\begin{align*}
+    a(\mathbf{r}) &= \text{amplitud}, \\
+    \varphi(\mathbf{r}) &= \text{fase}, \\
+    \nu &= \text{frecuencia (Hz)}, \\
+    \omega &= 2\pi\nu = \text{frecuencia angular (rad/s)}, \\
+    T &= \frac{1}{\nu} = \frac{2\pi}{\omega} = \text{período (s)}.
+\end{align*}
+
+Sólo consideraremos luz monocromática. Es decir, idealizaremos a los haces de luz como si tuvieran una única \textbf{longitud de onda} $\lambda = c/\nu$ en lugar de una distribución cercana a ese valor. Por ejemplo, una onda de luz roja se vería de la siguiente forma (con la amplitud normalizada):
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figuras/simple_waves.png}
+    \caption{Evolución temporal de una onda de luz roja (visible) para una posición $\mathbf{r}$ fija.}
+    \label{fig:opticalWaves}
+\end{figure}
+
+Cabe destacar que esta ecuación armónica en el tiempo no describe por completo a una onda de luz. Para lograrlo, conviene utilizar una representación compleja, cuya parte real seguirá coincidiendo con~\ref{cosWave}. El modelo matemático definitivo para el resto del capítulo es la ecuación
+
+{
+\Large
+\begin{equation}
+\label{complexWave}
+    U(\mathbf{r},t)
+    = a(\mathbf{r})e^{j[\varphi(\mathbf{r})+2\pi\nu t]},
+\end{equation}
+}
+
+\noindent
+donde
+
+{
+\large
+\begin{equation}
+    u(\mathbf{r},t) = \operatorname{Re}\{U(\mathbf{r},t)\}
+    = \frac{1}{2}\left[U(\mathbf{r},t) + U^*(\mathbf{r},t)\right]
+\end{equation}
+}
+
+\noindent
+y la operación $^*$ representa el conjugado complejo.
+
+La luz policromática se puede expresar como una superposicón de ondas de luz monocromáticas, integrando la ecuación anterior en una posición fija sobre un rango de frecuencias (equivalente a un rango de longitudes de onda) y aprovechando métodos de Fourier. No entraremos más en detalle pues el estudio de este tipo de luz se encuentra por fuera del alcance de este trabajo.
+
+\section{Interferencia}
 
 \subsection{No linealidades}
 
 \section{Dispositivos ópticos básicos}
 
 \begin{itemize}[nosep]
+    \item Guia de onda
     \item Delay lines.
     \item Interferómetro Mach-Zehnder.
     \item Memoria óptica (CDs).
