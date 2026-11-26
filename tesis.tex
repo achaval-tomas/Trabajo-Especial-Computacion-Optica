@@ -163,7 +163,7 @@ A partir de 1980 y hasta aproximadamente 2004, la computación óptica fue un te
 \begin{itemize}
     \item En 1982 se construyó y utilizó un procesador óptico para detectar trayectorias en un experimento físico de alta energía. Este utilizaba una matriz de LEDs como entrada y una matriz de kinoforms (pequeños elementos ópticos que alteran las propiedades de la luz que los atraviesa) como plano de procesamiento~\cite{kinoforms}.
     \item En 1986 se desarrolló un procesador de propósito especial basado en una matriz de hologramas grabados ópticamente~\cite{ambsHoughTransform}, el cual luego fue mejorado mediante la utilización de elementos ópticos difractivos (DOEs).
-    \item Alrededor del año 1990 surge la propuesta de la Digital Optical Computer II (DOC-II) por OptiComp Corporation~\cite{docII}, siendo esta una de las más importantes y populares de la época. En la siguiente sección se explicará brevemente su funcionamiento y los dispositivos ópticos que premitieron su construcción.
+    \item Alrededor del año 1990 surge la propuesta de la Digital Optical Computer II (DOC-II) por OptiComp Corporation~\cite{docII}, siendo esta una de las más importantes y populares de la época. En la siguiente sección se explicará brevemente su funcionamiento y los dispositivos ópticos que permitieron su construcción.
     \item En el área de almacenamiento, en 1995 se desarrolló un sistema para discos ópticos prometiendo hasta 1.2GB/s de lectura direccionable y paralelizada mediante el uso de un cabezal fijo~\cite{opticalmemory}. De todas formas, este tipo de memoria siempre tuvo una gran limitación que era el tiempo de escritura, muy necesario para lograr computación óptica de propósito general.
     \item En el año 2009, el Jet Propulsion Laboratory (JPL) de la NASA presentó mejoras en sus sistemas de reconocimiento automático de objetivos utilizando correladores ópticos, muy estudiados en los años anteriores, junto a redes neuronales que aplican un paso de post-procesamiento~\cite{JPLATR}.
 \end{itemize}
@@ -282,7 +282,7 @@ donde
 \noindent
 y la operación $^*$ representa el conjugado complejo.
 
-La luz policromática se puede expresar como una superposicón de ondas de luz monocromáticas, integrando la ecuación anterior en una posición fija sobre un rango de frecuencias (equivalente a un rango de longitudes de onda) y aprovechando métodos de Fourier. No entraremos más en detalle pues el estudio de este tipo de luz se encuentra por fuera del alcance de este trabajo.
+Las ondas policromáticas (por ejemplo, los pulsos de luz) tienen una dependencia temporal que no es armónica como lo es en el caso de las ondas monocromáticas. A pesar de ello, pueden expresarse como una superposición de ondas monocromáticas de distintas frecuencias. La transformada de Fourier nos permite descomponer una función arbitraria del tiempo en una integral de componentes armónicas, cada una caracterizada por una frecuencia, amplitud y fase. De esta manera, conociendo cómo se propagan las ondas monocromáticas en el espacio libre y a través de distintos componentes ópticos, es posible determinar el comportamiento de un sistema óptico frente a luz policromática mediante el principio de superposición. No profundizaremos en la descripción matemática de este tipo de luz, pero puede resultar útil en aplicaciones que buscan aprovechar distintas longitudes de onda para procesar información en paralelo, como ocurre en la multiplexación por división de longitud de onda (Wavelength-Division Multiplexing, WDM).
 
 \subsection{La luz como onda electromagnética}
 
