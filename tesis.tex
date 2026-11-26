@@ -192,13 +192,20 @@ A pesar de una fuerte época de desarrollo entre los años 1980 y 2000, la compu
 
 La primera de ellas, y la más popular de todas, es la Ley de Moore. Definida por Gordon Moore en 1965 y retocada en 1975 tras algunas observaciones. La última versión establecía que los avances en la electrónica iban a permitir duplicar la cantidad de componentes en un procesador cada dos años (cada un año en la teoría original). Esto también indicaría una reducción en el costo por componente y un aumento de la complejidad de cómputo que un procesador podía realizar. Para su sorpresa esta predicción fue acertada durante un gran período de tiempo. La mejora continua llevó a la electrónica a acercarse a límites físicos ya sea de disipación de calor o del tamaño y posibilidad de fabricación de cada componente, reduciendo significativamente el ritmo al que estos procesadores mejoran~\cite{leyDeMoore}. Este último fenómeno hace que desde los años 2000 se requieran avances extremadamente complejos acompañados de grandes inversiones para seguir mejorando las tecnologías. Uno de los avances más destacables ha sido la mejora en las técnicas de litografía con láseres ultravioletas.
 
-VELOCIDAD DE CLOCK
+Otro factor que permitió grandes avances en la electrónica fue la aceleración de los procesadores. En la figura~\ref{fig:cpuEvolution} se puede observar cómo la frecuencia a la que operaban creció exponencialmente hasta principios de los 2000, pero desde ese entonces no hubo más avances. Seguir acelerándolos causaría problemas de disipación de calor y niveles de consumo de energía desproporcionados, por lo que el interés se desvió hacia las arquitecturas multi-procesador para seguir mejorando el rendimiento. Más adelante veremos por qué la óptica permite superar estos límites.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figuras/cpu_evolution.jpg}
+    \caption{Evolución de distintas características de los procesadores electrónicos con el tiempo, con proyección hasta 2030~\cite{cpuEvolutionPaper}.}
+    \label{fig:cpuEvolution}
+\end{figure}
 
 Por otro lado, la computación óptica se enfrentaba a problemas con el tamaño y la accesibilidad de los dispositivos que se considereban ideales para el momento~\cite{history_optical_computing}. Los moduladores espaciales de luz, generalmente compuestos por una matriz de píxeles controlables individualmente que permiten modificar la luz incidente, fueron inicialmente un factor limitante y luego un foco de desarrollo con muchísimos avances introduciendo más de 50 variedades entre los 80s y 90s. A pesar de estos avances, seguían teniendo costos relativamente altos y una calidad no del todo ideal.
 
 Otro punto fuerte de la electrónica fueron los continuos avances en sistemas de memoria. Existieron propuestas ópticas muy fuertes utilizando tecnologías que parecían ser prometedoras, como hologramas y almacenamiento tridimensional. La única que logró ser popular a nivel mundial fueron los DVDs, que incluso tuvieron desarrollos enfocados a la computación como la DVD-RAM de 1996~\cite{kissner2024}. Este tipo de memoria logró ser superior a sus mayores competidores del momento (discos duros y memorias flash) en múltiples métricas, incluso en costo por GB. Lamentablemente su baja compatibilidad con sistemas existentes fue una de las principales razones por las que no logró comercializarse a gran escala, y su desarrollo fue abandonado poco tiempo después mientras las tecnologías electrónicas seguían mejorando.
 
-En conclusión, la industria vió un potencial de mejora exponencial en el mundo de la computación electrónica que, acompañado de grandes inversiones, no desaceleró hasta tener que enfrentarse a los límites de la física. Los intereses en la óptica se desviaron hacia las comunicaciones, inicialmente a largas distancias como los cables de fibra óptica submarinos~\cite{transOceanico} y más recientemente a escalas cada vez menores potenciando la interconexion entre chips y nodos de centros de datos.
+En conclusión, la industria vió un potencial de mejora exponencial en el mundo de la computación electrónica que, acompañado de grandes inversiones, no desaceleró hasta tener que enfrentarse a los límites de la física. Los intereses en la óptica se desviaron hacia las comunicaciones, inicialmente a largas distancias como los cables de fibra óptica submarinos~\cite{transOceanico} y más recientemente a escalas cada vez menores potenciando la interconexion entre chips y nodos de centros de datos. En la actualidad, esta cercanía de las teconologías ópticas a los procesadores electrónicos es una de las razones por las que se vuelve a despertar un interés en mantener los datos en forma de luz al realizar cómputo. 
 
 \chapter{Fundamentos físicos}
 
@@ -214,18 +221,15 @@ El \textbf{índice de refracción} es una propiedad de cada material y permite p
 
 \section{Formas de describir la luz}
 
-Para poder entender las interacciones de una onda de luz con materiales o con otra onda de luz, es conveniente establecer un modelo matemático. Hay muchas formas de describir la luz en distintos niveles de abstracción, dependiendo de la escala a la que se trabaje y de los fenómenos que se deseen describir. Algunas de ellas son las siguientes:
+Para poder entender las interacciones de una onda de luz con materiales o con otra onda de luz, es conveniente establecer un modelo matemático. Hay muchas formas de describir la luz en distintos niveles de abstracción, dependiendo de la escala a la que se trabaje y de los fenómenos que se deseen describir.
 
-\medskip
-\begin{itemize}[nosep]
-    \item \textbf{La luz en forma de rayos.} Es la abstracción más simple. Aquí la luz se visualiza como una línea recta cuando se mueve a través de un material homogéneo, describiendo de forma precisa los comportamientos a grandes escalas. Resulta útil para entender principios básicos como el comportamiento de la luz a través de materiales con distintos índices de refracción. Para nuestro caso de estudio, esta forma de describir la luz resulta insuficiente.
-    \item \textbf{La luz en forma de ondas.} La luz se describe mediante una ecuación compleja y armónica respecto al tiempo. Esto nos permitirá explicar el fenómeno de interferencia, uno de los más importantes en el mundo del procesamiento de datos ópticos. Es el nivel de abstracción más práctico para nuestro caso de estudio.
-    \item \textbf{La luz como onda electromagnética.} Se divide a la luz en dos ondas que describen un campo eléctrico y magnético que avanzan a la par de manera ortogonal. Permite modelar fenómenos más complejos, fuera del alcance de este trabajo.
-\end{itemize}
+\subsection{La luz en forma de rayos}
+
+Esta es la abstracción más simple. Aquí la luz se visualiza como una línea recta cuando se mueve a través de un material homogéneo, describiendo de forma suficientemente precisa los comportamientos a grandes escalas. Resulta útil para entender principios básicos como el comportamiento de la luz cuando viaja a través de materiales con distintos índices de refracción. Es demasiado abstracta para describir los fenómenos más importantes de la computación óptica, pero la utilizaremos a modo de introducción.
 
 \subsection{La luz en forma de ondas}
 
-El modelo matemático que mejor nos permite explicar los fenómenos más relevantes para la computación óptica es el de la luz en forma de ondas. La siguiente ecuación nos permite realizar un primer acercamiento a una descripción completa de una onda monocromática de luz:
+El modelo matemático que mejor nos permite explicar los fenómenos más relevantes para la computación óptica, como la interferencia que veremos a continuación, es el de la luz en forma de ondas. La siguiente ecuación nos permite realizar un primer acercamiento a una descripción completa de una onda monocromática de luz:
 
 {
 \large
@@ -279,6 +283,10 @@ donde
 y la operación $^*$ representa el conjugado complejo.
 
 La luz policromática se puede expresar como una superposicón de ondas de luz monocromáticas, integrando la ecuación anterior en una posición fija sobre un rango de frecuencias (equivalente a un rango de longitudes de onda) y aprovechando métodos de Fourier. No entraremos más en detalle pues el estudio de este tipo de luz se encuentra por fuera del alcance de este trabajo.
+
+\subsection{La luz como onda electromagnética}
+
+Se representa a la luz como dos ondas que describen un campo eléctrico y magnético que avanzan a la par de manera ortogonal. 
 
 \section{Interferencia}
 
